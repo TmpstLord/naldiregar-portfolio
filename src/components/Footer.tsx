@@ -3,8 +3,7 @@ export default function Footer() {
     <footer className="border-t border-slate-800/50 bg-slate-950 py-12 text-slate-400 text-sm">
       <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p>
-          © {new Date().getFullYear()} Raynaldi Irfansya Regar. Built with
-          Next.js & Tailwind CSS.
+          © 2026 Raynaldi Irfansya Regar. Built with Next.js & Tailwind CSS.
         </p>
         <div className="flex items-center gap-6">
           <a

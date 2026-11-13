@@ -1,40 +1,41 @@
-// src/types/portfolio.ts
+export interface ProjectMetric {
+  label: string;
+  value: string;
+  note: string;
+}
 
 export interface Project {
   id: string;
   title: string;
-  slug: string; // Digunakan untuk URL dinamis, misal: "visit-suluttenggo"
+  slug: string;
+  role: string;
+  timeline: string;
   description: string;
   techStack: string[];
-  githubUrl?: string; // Opsional karena tidak semua proyek open-source
+  githubUrl?: string;
   liveUrl?: string;
   featured: boolean;
+  problem: string;
+  solution: string;
+  architectureHighlights: string[];
+  metrics?: ProjectMetric[];
 }
 
 export interface Experience {
   id: string;
+  period: string;
   role: string;
-  company: string;
-  startDate: string; // Format: YYYY-MM
-  endDate?: string; // Kosongkan jika masih berlangsung
-  achievements: string[];
-}
-
-// Khusus untuk bedah teknis (Technical Case Study)
-export interface CaseStudy extends Project {
-  architecture: string; // Penjelasan arsitektur sistem
-  databaseSchema?: string; // Tautan gambar skema
-  performanceMetrics?: {
-    label: string;
-    value: string;
-  }[]; // Contoh untuk metrik Ocean Hero FPS/Memory atau hit API
+  organization: string;
+  type: "Internship" | "Competition" | "Certification";
+  description: string;
+  highlights: string[];
 }
 
 export interface GithubRepo {
   id: number;
   name: string;
-  description: string;
+  description: string | null;
   html_url: string;
   stargazers_count: number;
-  language: string;
+  language: string | null;
 }

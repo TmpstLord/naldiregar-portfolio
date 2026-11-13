@@ -1,6 +1,16 @@
+import ProjectSection from "@/components/ProjectSection";
 import Link from "next/link";
-import { featuredProjects } from "@/lib/data";
+import { featuredProjects, experiences } from "@/lib/data";
+import ContactSection from "@/components/ContactSection";
 import { getTopGithubRepos } from "@/lib/github";
+import {
+  ArrowUpRight,
+  Briefcase,
+  Award,
+  BadgeCheck,
+  Star,
+  FolderGit2,
+} from "lucide-react";
 
 export default async function Home() {
   const githubRepos = await getTopGithubRepos();
@@ -8,7 +18,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-200 selection:bg-cyan-500/30">
       {/* 1. Hero Section */}
-      <section className="relative px-6 pt-32 pb-20 mx-auto max-w-7xl lg:px-8 lg:pt-48">
+      <section className="relative px-6 pt-32 pb-20 mx-auto max-w-7xl lg:px-8 lg:pt-44">
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
         <div className="max-w-3xl text-left">
@@ -35,32 +45,34 @@ export default async function Home() {
             tangguh.
           </p>
 
-          <div className="flex items-center gap-x-6 mt-10">
+          <div className="flex flex-wrap items-center gap-4 mt-10">
             <Link
               href="#projects"
-              className="px-5 py-3 text-sm font-semibold text-slate-900 transition-colors bg-cyan-500 rounded-md hover:bg-cyan-400 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
+              className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-slate-950 transition-all bg-cyan-500 rounded-lg hover:bg-cyan-400 shadow-lg shadow-cyan-500/20"
             >
               Lihat Technical Case Study
+              <ArrowUpRight className="w-4 h-4" />
             </Link>
             <a
-              href="https://github.com/ImpostLord"
+              href="https://github.com/TmpstLord"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-semibold leading-6 text-white transition-colors hover:text-cyan-400"
+              className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-white transition-colors border rounded-lg border-slate-800 bg-slate-900/60 hover:border-slate-700 hover:text-cyan-400"
             >
-              Kunjungi GitHub <span aria-hidden="true">→</span>
+              Kunjungi GitHub
+              <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
         </div>
       </section>
 
-      {/* 2. Tech Stack Section (Sekilas) */}
-      <section className="py-12 border-y border-slate-800/50 bg-slate-900/50">
+      {/* 2. Tech Stack Section */}
+      <section className="py-12 border-y border-slate-800/50 bg-slate-900/40">
         <div className="px-6 mx-auto max-w-7xl lg:px-8">
-          <p className="text-sm font-semibold tracking-wide text-center uppercase text-slate-500">
+          <p className="text-xs font-semibold tracking-widest text-center uppercase text-slate-500">
             Teknologi & Ekosistem Utama
           </p>
-          <div className="flex flex-wrap justify-center gap-8 mt-8 opacity-75">
+          <div className="flex flex-wrap justify-center gap-3 mt-6">
             {[
               "Laravel",
               "Express.js",
@@ -72,7 +84,7 @@ export default async function Home() {
             ].map((tech) => (
               <span
                 key={tech}
-                className="text-xl font-bold tracking-tight text-slate-400"
+                className="px-4 py-2 text-sm font-semibold transition-colors border rounded-lg bg-slate-900/80 border-slate-800 text-slate-300 hover:border-cyan-500/40 hover:text-cyan-400"
               >
                 {tech}
               </span>
@@ -81,72 +93,95 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 3. Featured Projects Section */}
-      <section id="projects" className="py-24 sm:py-32">
+      {/* 3. Experience & Milestones Section (BARU) */}
+      <section id="experience" className="py-24 border-b border-slate-800/50">
         <div className="px-6 mx-auto max-w-7xl lg:px-8">
-          <div className="max-w-2xl mx-auto lg:mx-0">
+          <div className="max-w-2xl">
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Technical Case Studies
+              Experience & Milestones
             </h2>
-            <p className="mt-6 text-lg leading-8 text-slate-300">
-              Bedah arsitektur dan dokumentasi teknis dari sistem yang pernah
-              saya bangun.
+            <p className="mt-4 text-lg text-slate-400">
+              Rekam jejak pengembangan perangkat lunak, magang industri, dan
+              kompetisi tingkat nasional.
             </p>
           </div>
 
-          <div className="grid max-w-2xl grid-cols-1 gap-8 mx-auto mt-16 auto-rows-fr sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <article
-                key={project.id}
-                className="relative flex flex-col justify-between p-8 transition-colors border rounded-2xl bg-slate-900 border-slate-800 hover:border-cyan-500/50"
-              >
-                <div>
-                  <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs">
-                    {project.techStack.slice(0, 2).map((tech) => (
+          <div className="relative mt-14 border-l border-slate-800 ml-3 space-y-10">
+            {experiences.map((item) => (
+              <div key={item.id} className="relative pl-8 group">
+                {/* Titik indikator timeline */}
+                <span className="absolute -left-[9px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-slate-950 ring-2 ring-cyan-500/60 group-hover:ring-cyan-400 transition-all">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                </span>
+
+                <div className="p-6 transition-all border rounded-2xl bg-slate-900/40 border-slate-800/80 hover:border-cyan-500/40">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                      {item.type === "Internship" && (
+                        <Briefcase className="w-3.5 h-3.5" />
+                      )}
+                      {item.type === "Competition" && (
+                        <Award className="w-3.5 h-3.5" />
+                      )}
+                      {item.type === "Certification" && (
+                        <BadgeCheck className="w-3.5 h-3.5" />
+                      )}
+                      {item.type}
+                    </span>
+                    <span className="text-xs font-mono text-slate-500">
+                      {item.period}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-3 text-xl font-bold text-white">
+                    {item.role}
+                  </h3>
+                  <p className="text-sm font-medium text-cyan-400/90">
+                    {item.organization}
+                  </p>
+                  <p className="mt-3 text-sm leading-6 text-slate-400">
+                    {item.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {item.highlights.map((tag) => (
                       <span
-                        key={tech}
-                        className="relative z-10 px-3 py-1.5 font-medium rounded-full bg-slate-800 text-slate-300"
+                        key={tag}
+                        className="px-2.5 py-1 text-xs rounded-md bg-slate-950 text-slate-400 border border-slate-800"
                       >
-                        {tech}
+                        {tag}
                       </span>
                     ))}
                   </div>
-                  <div className="relative group">
-                    <h3 className="mt-3 text-lg font-semibold leading-6 text-white transition-colors group-hover:text-cyan-400">
-                      <Link href={`/projects/${project.slug}`}>
-                        <span className="absolute inset-0"></span>
-                        {project.title}
-                      </Link>
-                    </h3>
-                    <p className="mt-5 text-sm leading-6 line-clamp-3 text-slate-400">
-                      {project.description}
-                    </p>
-                  </div>
                 </div>
-              </article>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4. Live GitHub Repositories Section */}
-      <section className="py-24 border-t sm:py-32 border-slate-800/50 bg-slate-900/20">
+      {/* 4. Featured Projects Section */}
+      <ProjectSection projects={featuredProjects} />
+
+      {/* 5. Live GitHub Repositories Section */}
+      <section className="py-24 border-t border-slate-800/50 bg-slate-900/20">
         <div className="px-6 mx-auto max-w-7xl lg:px-8">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-4">
             <h2 className="text-3xl font-bold tracking-tight text-white">
               Latest GitHub Repositories
             </h2>
             <a
-              href="https://github.com/ImpostLord"
+              href="https://github.com/TmpstLord"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-semibold text-cyan-400 hover:text-cyan-300"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-cyan-400 hover:text-cyan-300"
             >
-              Lihat semua di GitHub &rarr;
+              Lihat semua di GitHub
+              <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
 
-          <div className="grid max-w-2xl grid-cols-1 gap-6 mx-auto mt-10 auto-rows-fr sm:mt-12 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <div className="grid max-w-2xl grid-cols-1 gap-6 mx-auto mt-10 auto-rows-fr lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {githubRepos.length > 0 ? (
               githubRepos.map((repo) => (
                 <a
@@ -154,24 +189,18 @@ export default async function Home() {
                   href={repo.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col justify-between p-6 transition-colors border rounded-xl bg-slate-900/50 border-slate-800 hover:border-cyan-500/50 group"
+                  className="flex flex-col justify-between p-6 transition-all border rounded-xl bg-slate-900/50 border-slate-800 hover:-translate-y-1 hover:border-cyan-500/50 group"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="w-6 h-6 text-slate-400 group-hover:text-white"
-                        fill="currentColor"
-                      >
-                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-                      </svg>
+                      <FolderGit2 className="w-5 h-5 text-slate-400 group-hover:text-cyan-400 transition-colors" />
                       {repo.language && (
-                        <span className="text-xs font-medium text-cyan-400">
+                        <span className="px-2.5 py-0.5 text-xs font-medium rounded-md bg-cyan-500/10 text-cyan-400">
                           {repo.language}
                         </span>
                       )}
                     </div>
-                    <h3 className="text-lg font-semibold text-white group-hover:text-cyan-400">
+                    <h3 className="text-lg font-semibold text-white group-hover:text-cyan-400 transition-colors">
                       {repo.name}
                     </h3>
                     <p className="mt-2 text-sm leading-6 line-clamp-2 text-slate-400">
@@ -179,21 +208,19 @@ export default async function Home() {
                         "Tidak ada deskripsi pada repository ini."}
                     </p>
                   </div>
-                  <div className="flex items-center gap-2 mt-6 text-sm text-slate-500">
-                    <span className="flex items-center gap-1">
-                      ⭐ {repo.stargazers_count}
-                    </span>
+                  <div className="flex items-center gap-2 mt-6 text-xs font-medium text-slate-500">
+                    <Star className="w-3.5 h-3.5 text-amber-400/80" />
+                    <span>{repo.stargazers_count}</span>
                   </div>
                 </a>
               ))
             ) : (
-              <p className="text-slate-400">
-                Sedang mengambil data repositori...
-              </p>
+              <p className="text-slate-400">Memuat data repositori...</p>
             )}
           </div>
         </div>
       </section>
+      <ContactSection />
     </main>
   );
 }

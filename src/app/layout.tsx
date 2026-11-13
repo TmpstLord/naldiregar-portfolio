@@ -1,12 +1,12 @@
-import type { Metadata } from "next/metadata";
+import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Raynaldi Irfansya Regar — Fullstack & Game Backend Engineer",
+  title: "MasterOfTempest | Raynaldi Irfansya Regar",
   description:
-    "Portofolio profesional dan bedah teknis studi kasus pengembangan web dan game.",
+    "Portofolio Full-Stack Web & Game Backend Engineer — Studi kasus arsitektur Laravel, Express.js, Unity DOTS/ECS, dan Godot Engine.",
 };
 
 export default function RootLayout({
