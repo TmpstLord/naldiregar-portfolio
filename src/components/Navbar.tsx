@@ -10,6 +10,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Experience", href: "/#experience" },
     { name: "Case Studies", href: "/#projects" },
+    { name: "Resume", href: "/resume" },
     { name: "GitHub", href: "https://github.com/TmpstLord", external: true },
   ];
 

@@ -2,6 +2,7 @@ import ProjectSection from "@/components/ProjectSection";
 import Link from "next/link";
 import { featuredProjects, experiences } from "@/lib/data";
 import ContactSection from "@/components/ContactSection";
+import ProfilePhoto from "@/components/ProfilePhoto";
 import { getTopGithubRepos } from "@/lib/github";
 import {
   ArrowUpRight,
@@ -10,6 +11,7 @@ import {
   BadgeCheck,
   Star,
   FolderGit2,
+  FileText,
 } from "lucide-react";
 
 export default async function Home() {
@@ -21,48 +23,61 @@ export default async function Home() {
       <section className="relative px-6 pt-32 pb-20 mx-auto max-w-7xl lg:px-8 lg:pt-44">
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
-        <div className="max-w-3xl text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-sm font-medium border rounded-full text-cyan-400 border-cyan-500/30 bg-cyan-500/10">
-            <span className="relative flex w-2 h-2">
-              <span className="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-cyan-400"></span>
-              <span className="relative inline-flex w-2 h-2 rounded-full bg-cyan-500"></span>
-            </span>
-            Available for Hire (Backend / Fullstack Role)
+        <div className="flex flex-col-reverse items-start justify-between gap-12 lg:flex-row lg:items-center">
+          {/* Kolom Kiri: Teks Perkenalan */}
+          <div className="max-w-2xl text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-sm font-medium border rounded-full text-cyan-400 border-cyan-500/30 bg-cyan-500/10">
+              <span className="relative flex w-2 h-2">
+                <span className="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-cyan-400"></span>
+                <span className="relative inline-flex w-2 h-2 rounded-full bg-cyan-500"></span>
+              </span>
+              Available for Hire (Backend / Fullstack Role)
+            </div>
+
+            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
+              Raynaldi Irfansya Regar
+            </h1>
+            <h2 className="mt-4 text-2xl font-semibold text-slate-400 sm:text-3xl">
+              Full-Stack Web & Game Backend Engineer
+            </h2>
+
+            <p className="mt-6 text-lg leading-8 text-slate-300">
+              Membangun sistem operasional yang solid dengan{" "}
+              <strong>Laravel & Express.js</strong>, dan mengoptimalkan performa
+              game menggunakan <strong>Unity DOTS & Godot</strong>.
+              Berpengalaman merancang arsitektur database transaksional dan
+              integrasi API yang tangguh.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 mt-10">
+              <Link
+                href="#projects"
+                className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-slate-950 transition-all bg-cyan-500 rounded-lg hover:bg-cyan-400 shadow-lg shadow-cyan-500/20"
+              >
+                Lihat Technical Case Study
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/resume"
+                className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-white transition-colors border rounded-lg border-slate-700 bg-slate-900/80 hover:border-cyan-500/50 hover:text-cyan-400"
+              >
+                <FileText className="w-4 h-4 text-cyan-400" />
+                Resume / CV
+              </Link>
+              <a
+                href="https://github.com/TmpstLord"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-white transition-colors border rounded-lg border-slate-800 bg-slate-900/60 hover:border-slate-700 hover:text-cyan-400"
+              >
+                Kunjungi GitHub
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </div>
           </div>
 
-          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
-            Raynaldi Irfansya Regar
-          </h1>
-          <h2 className="mt-4 text-2xl font-semibold text-slate-400 sm:text-3xl">
-            Full-Stack Web & Game Backend Engineer
-          </h2>
-
-          <p className="mt-6 text-lg leading-8 text-slate-300">
-            Membangun sistem operasional yang solid dengan{" "}
-            <strong>Laravel & Express.js</strong>, dan mengoptimalkan performa
-            game menggunakan <strong>Unity DOTS & Godot</strong>. Berpengalaman
-            merancang arsitektur database transaksional dan integrasi API yang
-            tangguh.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4 mt-10">
-            <Link
-              href="#projects"
-              className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-slate-950 transition-all bg-cyan-500 rounded-lg hover:bg-cyan-400 shadow-lg shadow-cyan-500/20"
-            >
-              Lihat Technical Case Study
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
-            <a
-              href="https://github.com/TmpstLord"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-white transition-colors border rounded-lg border-slate-800 bg-slate-900/60 hover:border-slate-700 hover:text-cyan-400"
-            >
-              Kunjungi GitHub
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-          </div>
+          {/* Kolom Kanan: Foto Profil */}
+          <ProfilePhoto />
         </div>
       </section>
 

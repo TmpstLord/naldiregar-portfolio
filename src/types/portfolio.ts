@@ -4,6 +4,11 @@ export interface ProjectMetric {
   note: string;
 }
 
+export interface ProjectScreenshot {
+  src: string;
+  caption: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -19,6 +24,8 @@ export interface Project {
   solution: string;
   architectureHighlights: string[];
   metrics?: ProjectMetric[];
+  coverImage?: string;
+  gallery?: ProjectScreenshot[];
 }
 
 export interface Experience {
