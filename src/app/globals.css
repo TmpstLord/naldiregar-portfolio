@@ -1,5 +1,82 @@
 @import "tailwindcss";
+/* Tempel di bawah isi globals.css kamu (setelah @import "tailwindcss" / @tailwind ...). */
 
+:root {
+  --squall: #101c26; /* latar: langit badai */
+  --deck: #172733; /* permukaan sedikit lebih terang */
+  --bone: #e6ebe8; /* teks utama */
+  --rain: #8ca0ae; /* teks sekunder */
+  --bolt: #f2d230; /* satu-satunya aksen: kilat */
+  --line: rgb(230 235 232 / 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--squall);
+  color: var(--bone);
+  font-family: var(--font-body), Georgia, serif;
+}
+
+::selection {
+  background: var(--bolt);
+  color: var(--squall);
+}
+
+:focus-visible {
+  outline: 2px solid var(--bolt);
+  outline-offset: 3px;
+}
+
+/* Huruf display: Archivo versi sempit dan tebal, seperti papan peringatan cuaca */
+.display {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-variation-settings: "wdth" 70;
+  letter-spacing: -0.01em;
+}
+
+/* Garis penanda kuning di bawah teks; terisi penuh saat di-hover */
+.mark {
+  background-image: linear-gradient(var(--bolt), var(--bolt));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.18em;
+  transition:
+    background-size 0.25s ease,
+    color 0.25s ease;
+}
+.mark:hover,
+.mark:focus-visible,
+a:hover > .mark,
+a:focus-visible > .mark {
+  background-size: 100% 100%;
+  color: var(--squall);
+}
+
+/* Marquee tech stack */
+@keyframes drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.drift {
+  animation: drift 38s linear infinite;
+}
+.drift-wrap:hover .drift {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .drift {
+    animation: none;
+  }
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;

@@ -1,129 +1,139 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { Project } from "@/types/portfolio";
-import { ArrowUpRight, Layers, Server, Gamepad2 } from "lucide-react";
 
 type FilterCategory = "All" | "Web & Backend" | "Game Systems";
 
+const FILTERS: FilterCategory[] = ["All", "Web & Backend", "Game Systems"];
+
 export default function ProjectSection({ projects }: { projects: Project[] }) {
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("All");
+  const [openId, setOpenId] = useState<Project["id"] | null>(
+    projects[0]?.id ?? null,
+  );
 
   const isGameProject = (slug: string) =>
     slug === "ocean-hero-benchmark" || slug === "godot-game-systems";
 
-  const filteredProjects = projects.filter((project) => {
-    if (activeFilter === "All") return true;
-    if (activeFilter === "Game Systems") return isGameProject(project.slug);
-    return !isGameProject(project.slug);
-  });
+  const inFilter = (p: Project, f: FilterCategory) =>
+    f === "All"
+      ? true
+      : f === "Game Systems"
+        ? isGameProject(p.slug)
+        : !isGameProject(p.slug);
 
-  const tabs: { label: FilterCategory; count: number; icon: ReactNode }[] = [
-    {
-      label: "All",
-      count: projects.length,
-      icon: <Layers className="w-3.5 h-3.5" />,
-    },
-    {
-      label: "Web & Backend",
-      count: projects.filter((p) => !isGameProject(p.slug)).length,
-      icon: <Server className="w-3.5 h-3.5" />,
-    },
-    {
-      label: "Game Systems",
-      count: projects.filter((p) => isGameProject(p.slug)).length,
-      icon: <Gamepad2 className="w-3.5 h-3.5" />,
-    },
-  ];
+  const filtered = projects.filter((p) => inFilter(p, activeFilter));
 
   return (
-    <section id="projects" className="py-24 sm:py-28">
-      <div className="px-6 mx-auto max-w-7xl lg:px-8">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Technical Case Studies
+    <section id="projects" className="border-t border-[var(--line)] py-28">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="flex flex-wrap items-end justify-between gap-8">
+          <div>
+            <h2 className="display text-5xl leading-none sm:text-6xl">
+              Studi kasus teknis
             </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-400">
+            <p className="mt-5 max-w-md text-lg leading-7 text-[var(--rain)]">
               Bedah arsitektur dan dokumentasi teknis dari sistem yang pernah
               saya bangun.
             </p>
           </div>
 
-          {/* Tab Filter Interaktif */}
-          <div className="inline-flex flex-wrap gap-2 p-1.5 rounded-xl bg-slate-900/90 border border-slate-800">
-            {tabs.map((tab) => {
-              const isActive = activeFilter === tab.label;
+          <div
+            role="group"
+            aria-label="Filter proyek"
+            className="flex flex-wrap gap-2"
+          >
+            {FILTERS.map((f) => {
+              const active = activeFilter === f;
               return (
                 <button
-                  key={tab.label}
+                  key={f}
                   type="button"
-                  onClick={() => setActiveFilter(tab.label)}
-                  className={`inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
-                    isActive
-                      ? "bg-cyan-500 text-slate-950 shadow-sm shadow-cyan-500/20"
-                      : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+                  aria-pressed={active}
+                  onClick={() => {
+                    setActiveFilter(f);
+                    setOpenId(null);
+                  }}
+                  className={`px-3 py-1.5 text-sm transition-colors ${
+                    active
+                      ? "bg-[var(--bolt)] text-[var(--squall)]"
+                      : "text-[var(--rain)] hover:text-[var(--bone)]"
                   }`}
                 >
-                  {tab.icon}
-                  <span>{tab.label}</span>
-                  <span
-                    className={`px-1.5 py-0.5 text-[10px] rounded-md ${
-                      isActive
-                        ? "bg-slate-950/20 text-slate-950"
-                        : "bg-slate-800 text-slate-400"
-                    }`}
-                  >
-                    {tab.count}
-                  </span>
+                  {f} ({projects.filter((p) => inFilter(p, f)).length})
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Grid Kartu Proyek */}
-        <div className="grid max-w-2xl grid-cols-1 gap-8 mx-auto mt-14 auto-rows-fr lg:mx-0 lg:max-w-none md:grid-cols-2">
-          {filteredProjects.map((project) => (
-            <article
-              key={project.id}
-              className="relative flex flex-col justify-between p-8 transition-all border rounded-2xl bg-slate-900/60 border-slate-800 hover:-translate-y-1 hover:border-cyan-500/50 group"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-2 text-xs font-mono text-cyan-400/90 mb-4">
-                  <span>{project.role}</span>
-                  <span className="text-slate-500">
-                    {project.timeline.split("•")[0]}
-                  </span>
-                </div>
+        <ul className="mt-14 border-t border-[var(--line)]">
+          {filtered.map((p) => {
+            const isOpen = openId === p.id;
+            const panelId = `panel-${p.slug}`;
 
-                <h3 className="flex items-start justify-between gap-3 text-xl font-bold leading-7 text-white transition-colors group-hover:text-cyan-400">
-                  <Link href={`/projects/${project.slug}`}>
-                    <span className="absolute inset-0"></span>
-                    {project.title}
-                  </Link>
-                  <ArrowUpRight className="w-5 h-5 mt-1 shrink-0 text-slate-500 group-hover:text-cyan-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            return (
+              <li key={p.id} className="border-b border-[var(--line)]">
+                <h3>
+                  <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => setOpenId(isOpen ? null : p.id)}
+                    className="flex w-full items-baseline justify-between gap-6 py-7 text-left"
+                  >
+                    <span className="display text-3xl sm:text-5xl">
+                      <span
+                        className={`box-decoration-clone px-1 transition-colors duration-300 ${
+                          isOpen ? "bg-[var(--bolt)] text-[var(--squall)]" : ""
+                        }`}
+                      >
+                        {p.title}
+                      </span>
+                    </span>
+                    <span className="shrink-0 text-[var(--rain)]">
+                      {p.timeline.split("•")[0].trim()}
+                    </span>
+                  </button>
                 </h3>
 
-                <p className="mt-4 text-sm leading-6 line-clamp-3 text-slate-400">
-                  {project.description}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2 pt-6 mt-6 border-t border-slate-800/70 text-xs">
-                {project.techStack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="relative z-10 px-3 py-1 font-medium rounded-full bg-slate-800/80 text-slate-300"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={panelId}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid gap-6 pb-10 md:grid-cols-[1fr_2fr]">
+                        <p className="text-[var(--bolt)]">{p.role}</p>
+                        <div>
+                          <p className="max-w-2xl text-lg leading-8 text-[var(--bone)]/85">
+                            {p.description}
+                          </p>
+                          <p className="mt-4 text-sm italic text-[var(--rain)]">
+                            {p.techStack.join(", ")}
+                          </p>
+                          <Link
+                            href={`/projects/${p.slug}`}
+                            className="mark mt-6 inline-block"
+                          >
+                            Baca studi kasus lengkap
+                          </Link>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

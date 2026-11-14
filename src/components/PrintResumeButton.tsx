@@ -7,9 +7,9 @@ export default function PrintResumeButton() {
     <button
       type="button"
       onClick={() => window.print()}
-      className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/20 cursor-pointer print:hidden"
+      className="inline-flex cursor-pointer items-center gap-2 bg-[var(--bolt,#facc15)] px-5 py-2.5 text-sm font-semibold text-[var(--squall)] transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--bolt,#facc15)] print:hidden"
     >
-      <Printer className="w-4 h-4" />
+      <Printer className="h-4 w-4" aria-hidden />
       Print / Save as PDF
     </button>
   );
