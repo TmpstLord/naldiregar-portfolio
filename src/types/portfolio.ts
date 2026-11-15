@@ -36,6 +36,8 @@ export interface Experience {
   type: "Internship" | "Competition" | "Certification";
   description: string;
   highlights: string[];
+  proofUrl?: string;
+  proofLabel?: string;
 }
 
 export interface GithubRepo {

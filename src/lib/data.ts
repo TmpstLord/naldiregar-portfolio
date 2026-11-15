@@ -6,10 +6,11 @@ export const featuredProjects: Project[] = [
     title: "Visit Suluttenggo Tourism Web Platform",
     slug: "visit-suluttenggo",
     role: "Web Developer Intern",
-    timeline: "2024 • PT Media Makasiow",
+    timeline: "2025 • PT Media Makasiow",
     description:
       "Mengembangkan portal informasi pariwisata regional menggunakan JavaScript dan EJS untuk rendering halaman dinamis, serta Firebase sebagai basis data cloud.",
     techStack: ["JavaScript", "Node.js", "EJS", "Firebase"],
+    githubUrl: "https://github.com/TmpstLord/visit-suluttenggo-web",
     featured: true,
     problem:
       "Portal informasi pariwisata regional membutuhkan penyajian katalog destinasi, akomodasi, dan agenda budaya yang cepat dimuat serta mudah diperbarui secara dinamis tanpa harus mengubah kode tampilan secara manual.",
@@ -47,7 +48,7 @@ export const featuredProjects: Project[] = [
     description:
       "Aplikasi bank sampah digital berbasis Android yang lolos ke tahap final nasional Abdidaya PPK Ormawa 2024. Dibangun dengan Kodular dan Spreadsheet sebagai pusat pencatatan transaksi.",
     techStack: ["Kodular", "Spreadsheet / Excel", "Block Logic", "Data Flow"],
-    githubUrl: "https://github.com/TmpstLord",
+    githubUrl: "https://github.com/TmpstLord/rusdi-waste-bank",
     featured: true,
     problem:
       "Pencatatan setoran sampah, konversi berat ke saldo nasabah, dan rekapitulasi operasional bank sampah masih berjalan manual di buku catatan sehingga rawan selisih data dan lambat direkap saat pelaporan.",
@@ -85,6 +86,7 @@ export const featuredProjects: Project[] = [
     description:
       "Studi kasus empiris membandingkan performa arsitektur Unity DOTS/ECS melawan MonoBehaviour OOP dalam skenario game 2D, difokuskan pada optimalisasi frame rate dan memori.",
     techStack: ["Unity DOTS", "C#", "ECS Architecture", "Profiling"],
+    githubUrl: "https://github.com/TmpstLord/ocean-hero-dots-benchmark",
     featured: true,
     problem:
       "Pada skenario game 2D mobile dengan ratusan hingga ribuan entitas aktif secara bersamaan, pendekatan tradisional MonoBehaviour OOP memicu overhead garbage collection dan penurunan frame rate (FPS drop).",
@@ -122,7 +124,7 @@ export const featuredProjects: Project[] = [
     description:
       "Perancangan arsitektur backend, mekanik minigame interaktif, serta manajemen state misi multi-region (Solara & Riverfall) menggunakan Godot Engine.",
     techStack: ["Godot Engine", "GDScript", "State Management", "Backend API"],
-    githubUrl: "https://github.com/TmpstLord",
+    githubUrl: "https://github.com/TmpstLord/eco-heroes-godot",
     featured: true,
     problem:
       "Transisi antar-scene misi, sinkronisasi timer HUD saat misi gagal atau selesai, serta pemicu dialog NPC lintas wilayah sering mengalami desinkronisasi state yang merusak alur permainan.",
@@ -156,6 +158,7 @@ export const featuredProjects: Project[] = [
     description:
       "Platform manajemen dokumen dan pemantauan kelengkapan data akreditasi (LKPS & LED) Program Studi Sistem Informasi UNSRAT dengan pelacakan progres otomatis dan mode tinjauan asesor.",
     techStack: ["Laravel", "MySQL", "JavaScript", "Tailwind CSS"],
+    githubUrl: "https://github.com/TmpstLord/akreditasi-si-dashboard",
     featured: true,
     problem:
       "Pengelolaan ratusan tabel instrumen LKPS, dokumen pendukung LED, dan pengecekan kelengkapan bukti fisik per kriteria akreditasi membutuhkan sistem terpusat agar tim penyusun dan asesor dapat menelusuri dokumen secara cepat dan terukur.",
@@ -189,7 +192,7 @@ export const featuredProjects: Project[] = [
 export const experiences: Experience[] = [
   {
     id: "exp-1",
-    period: "2024",
+    period: "2025",
     role: "Web Developer Intern (PKL)",
     organization: "PT Media Makasiow",
     type: "Internship",
@@ -200,6 +203,8 @@ export const experiences: Experience[] = [
       "Firebase Database Integration",
       "Web Content Management",
     ],
+    proofUrl: "/credentials/pkl-media-makasiow.pdf",
+    proofLabel: "Lihat surat keterangan PKL",
   },
   {
     id: "exp-2",
@@ -210,6 +215,8 @@ export const experiences: Experience[] = [
     description:
       "Membangun aplikasi bank sampah digital RUSDI berbasis Kodular & Spreadsheet dan mempresentasikan arsitektur alur datanya di tingkat nasional.",
     highlights: ["Kodular Mobile Logic", "Spreadsheet Data Architecture"],
+    proofUrl: "/credentials/finalis-abdidaya-rusdi.jpg",
+    proofLabel: "Lihat sertifikat finalis nasional",
   },
   {
     id: "exp-3",
@@ -220,6 +227,8 @@ export const experiences: Experience[] = [
     description:
       "Meraih Juara 1 inovasi teknologi pendidikan lewat aplikasi SiPanca (LIDM) dan Juara 4 rekayasa perangkat lunak lewat proyek SIP5 (Gemastik).",
     highlights: ["Software Engineering", "Educational App Development"],
+    proofUrl: "/credentials/juara-lidm-gemastik.jpg",
+    proofLabel: "Lihat piagam penghargaan",
   },
   {
     id: "exp-4",
@@ -230,5 +239,7 @@ export const experiences: Experience[] = [
     description:
       "Tersertifikasi secara nasional dalam standar pengembangan web, struktur data, dan implementasi antarmuka aplikasi.",
     highlights: ["Web Standards", "Clean Code Implementation"],
+    proofUrl: "/credentials/sertifikat-bnsp-jwd.pdf",
+    proofLabel: "Lihat sertifikat BNSP",
   },
 ];
