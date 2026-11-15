@@ -3,38 +3,38 @@ import { Project, Experience } from "@/types/portfolio";
 export const featuredProjects: Project[] = [
   {
     id: "1",
-    title: "Visit Suluttenggo Backend Services",
+    title: "Visit Suluttenggo Tourism Web Platform",
     slug: "visit-suluttenggo",
-    role: "Backend Web Developer Intern",
+    role: "Web Developer Intern",
     timeline: "2024 • PT Media Makasiow",
     description:
-      "Merancang dan mengembangkan arsitektur backend untuk portal pariwisata regional, menangani manajemen rute API, dan skema database relasional.",
-    techStack: ["PHP", "Laravel", "MySQL", "REST API"],
+      "Mengembangkan portal informasi pariwisata regional menggunakan JavaScript dan EJS untuk rendering halaman dinamis, serta Firebase sebagai basis data cloud.",
+    techStack: ["JavaScript", "Node.js", "EJS", "Firebase"],
     featured: true,
     problem:
-      "Portal informasi pariwisata regional membutuhkan pengelolaan data destinasi, akomodasi, dan agenda budaya yang terstruktur dengan waktu respons cepat serta pemisahan hak akses pengelola konten.",
+      "Portal informasi pariwisata regional membutuhkan penyajian katalog destinasi, akomodasi, dan agenda budaya yang cepat dimuat serta mudah diperbarui secara dinamis tanpa harus mengubah kode tampilan secara manual.",
     solution:
-      "Membangun layanan RESTful API terstandarisasi menggunakan Laravel dengan normalisasi skema database MySQL, validasi request berlapis, dan optimasi query relasional untuk meminimalkan beban server.",
+      "Membangun aplikasi web dengan arsitektur server-side templating menggunakan EJS dan JavaScript yang terhubung ke Firebase untuk penyimpanan dan pengelolaan data destinasi secara terstruktur.",
     architectureHighlights: [
-      "Perancangan skema relasional MySQL dengan indexing pada kolom pencarian destinasi dan kategori.",
-      "Pemisahan layer Controller, Service, dan Request Validation agar kode mudah dipelihara.",
-      "Standardisasi format JSON response dan penanganan HTTP status code untuk konsumsi frontend.",
+      "Strukturisasi koleksi data destinasi, kategori wisata, dan informasi akomodasi di Firebase untuk pembacaan serta pembaruan data secara real-time.",
+      "Implementasi komponen tampilan modular menggunakan EJS (Embedded JavaScript) untuk merender halaman katalog dan detail wisata secara dinamis.",
+      "Pengelolaan alur CRUD konten dan validasi input berbasis JavaScript untuk menjaga konsistensi data pada portal.",
     ],
     metrics: [
       {
-        label: "Arsitektur",
-        value: "REST API",
-        note: "Modular Service Pattern",
+        label: "View Engine",
+        value: "EJS",
+        note: "Dynamic Server Templating",
       },
       {
         label: "Database",
-        value: "MySQL",
-        note: "Normalized Relational Schema",
+        value: "Firebase",
+        note: "Cloud NoSQL & Real-time Sync",
       },
       {
-        label: "Fokus Utama",
-        value: "Data Integrity",
-        note: "Server-side Validation",
+        label: "Core Stack",
+        value: "JavaScript",
+        note: "End-to-End Web Logic",
       },
     ],
   },
@@ -42,21 +42,21 @@ export const featuredProjects: Project[] = [
     id: "2",
     title: "RUSDI - Digital Waste Bank Platform",
     slug: "rusdi-waste-bank",
-    role: "Full-Stack Developer",
+    role: "Mobile App & Data Flow Developer",
     timeline: "2024 • Abdidaya PPK Ormawa National Finalist",
     description:
-      "Sistem bank sampah digital end-to-end yang lolos ke tahap final nasional Abdidaya PPK Ormawa 2024. Menangani manajemen pengguna dan pelacakan transaksi.",
-    techStack: ["Node.js", "Express", "Firebase", "MySQL"],
+      "Aplikasi bank sampah digital berbasis Android yang lolos ke tahap final nasional Abdidaya PPK Ormawa 2024. Dibangun dengan Kodular dan Spreadsheet sebagai pusat pencatatan transaksi.",
+    techStack: ["Kodular", "Spreadsheet / Excel", "Block Logic", "Data Flow"],
     githubUrl: "https://github.com/TmpstLord",
     featured: true,
     problem:
-      "Pencatatan setoran sampah, konversi poin/saldo nasabah, dan rekapitulasi operasional bank sampah masih berjalan manual sehingga rawan selisih data dan sulit dipantau secara real-time.",
+      "Pencatatan setoran sampah, konversi berat ke saldo nasabah, dan rekapitulasi operasional bank sampah masih berjalan manual di buku catatan sehingga rawan selisih data dan lambat direkap saat pelaporan.",
     solution:
-      "Mengembangkan platform digital terintegrasi yang mencatat transaksi penimbangan sampah, menghitung konversi saldo otomatis, serta menyediakan dashboard pemantauan bagi pengelola dan nasabah.",
+      "Merancang aplikasi mobile Android menggunakan Kodular yang terhubung langsung ke Spreadsheet sebagai basis data terpusat, mengotomatiskan kalkulasi nilai tukar sampah dan rekap saldo tanpa biaya infrastruktur server berat.",
     architectureHighlights: [
-      "Alur pencatatan transaksi setoran sampah dengan riwayat audit yang transparan bagi nasabah.",
-      "Sinkronisasi data pengguna dan autentikasi berbasis peran (nasabah vs. operator bank sampah).",
-      "Dashboard rekapitulasi volume sampah terkelola untuk mendukung pelaporan program.",
+      "Perancangan logika blok aplikasi Android di Kodular untuk input penimbangan sampah, kalkulasi harga per kategori secara otomatis, dan pengecekan saldo nasabah.",
+      "Strukturisasi skema tabel Spreadsheet (Master Nasabah, Daftar Harga Sampah, dan Log Transaksi) agar mudah diaudit oleh pengurus bank sampah di lapangan.",
+      "Alur sinkronisasi baca/tulis data antara aplikasi Kodular dan Spreadsheet untuk rekapitulasi volume sampah terkelola secara langsung.",
     ],
     metrics: [
       {
@@ -65,14 +65,14 @@ export const featuredProjects: Project[] = [
         note: "Abdidaya PPK Ormawa 2024",
       },
       {
-        label: "Core Flow",
-        value: "End-to-End",
-        note: "Penimbangan hingga Saldo",
+        label: "Client App",
+        value: "Kodular",
+        note: "Android Mobile Interface",
       },
       {
-        label: "Backend",
-        value: "Express & Cloud",
-        note: "Real-time Data Sync",
+        label: "Database",
+        value: "Spreadsheet",
+        note: "Zero-Cost Cloud Ledger",
       },
     ],
   },
@@ -147,21 +147,58 @@ export const featuredProjects: Project[] = [
       },
     ],
   },
+  {
+    id: "5",
+    title: "Sistem Dashboard Akreditasi Program Studi",
+    slug: "accreditation-dashboard",
+    role: "Full-Stack Web Developer",
+    timeline: "2026 • Sistem Informasi UNSRAT",
+    description:
+      "Platform manajemen dokumen dan pemantauan kelengkapan data akreditasi (LKPS & LED) Program Studi Sistem Informasi UNSRAT dengan pelacakan progres otomatis dan mode tinjauan asesor.",
+    techStack: ["Laravel", "MySQL", "JavaScript", "Tailwind CSS"],
+    featured: true,
+    problem:
+      "Pengelolaan ratusan tabel instrumen LKPS, dokumen pendukung LED, dan pengecekan kelengkapan bukti fisik per kriteria akreditasi membutuhkan sistem terpusat agar tim penyusun dan asesor dapat menelusuri dokumen secara cepat dan terukur.",
+    solution:
+      "Membangun dashboard web terintegrasi dengan pembangun tabel/kolom dinamis, kalkulasi persentase kelengkapan kriteria secara otomatis berbasis database, pencarian global lintas instrumen, serta pratinjau dokumen PDF langsung di dalam aplikasi.",
+    architectureHighlights: [
+      "Logika agregasi database untuk menghitung rasio kelengkapan data dan dokumen per kriteria akreditasi secara otomatis dengan indikator status berwarna.",
+      "Dynamic column builder dan drag-and-drop row sorting untuk menyesuaikan struktur tabel instrumen LKPS yang bervariasi tanpa mengubah skema inti.",
+      "Pencarian global lintas tabel, integrated PDF viewer untuk verifikasi bukti fisik, serta pemisahan hak akses antara tim penyusun dan mode tinjauan asesor.",
+    ],
+    metrics: [
+      {
+        label: "Domain Sistem",
+        value: "LKPS & LED",
+        note: "Manajemen Instrumen Akreditasi",
+      },
+      {
+        label: "Otomasi",
+        value: "Auto-Progress",
+        note: "Kalkulasi Kelengkapan Kriteria",
+      },
+      {
+        label: "Fitur Utama",
+        value: "Dynamic Table",
+        note: "PDF Viewer & Assessor Mode",
+      },
+    ],
+  },
 ];
 
 export const experiences: Experience[] = [
   {
     id: "exp-1",
     period: "2024",
-    role: "Backend Web Developer Intern (PKL)",
+    role: "Web Developer Intern (PKL)",
     organization: "PT Media Makasiow",
     type: "Internship",
     description:
-      "Mengembangkan layanan backend dan struktur database untuk portal informasi pariwisata regional Visit Suluttenggo.",
+      "Mengembangkan fitur web dinamis menggunakan JavaScript, EJS templating, dan integrasi database Firebase untuk portal informasi pariwisata regional Visit Suluttenggo.",
     highlights: [
-      "RESTful API Design",
-      "Relational Database Modeling",
-      "Backend Optimization",
+      "JavaScript & EJS Templating",
+      "Firebase Database Integration",
+      "Web Content Management",
     ],
   },
   {
@@ -171,8 +208,8 @@ export const experiences: Experience[] = [
     organization: "Abdidaya PPK Ormawa 2024",
     type: "Competition",
     description:
-      "Membangun platform bank sampah digital RUSDI dan mempresentasikan arsitektur sistem di tingkat nasional.",
-    highlights: ["Full-Stack Architecture", "Digital Transaction Flow"],
+      "Membangun aplikasi bank sampah digital RUSDI berbasis Kodular & Spreadsheet dan mempresentasikan arsitektur alur datanya di tingkat nasional.",
+    highlights: ["Kodular Mobile Logic", "Spreadsheet Data Architecture"],
   },
   {
     id: "exp-3",
