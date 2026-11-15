@@ -6,8 +6,7 @@ type P = { x: number; y: number; px: number; py: number; life: number };
 
 /**
  * Garis-garis tipis yang mengalir seperti angin badai.
- * Kursor memutar arus di sekitarnya. Berhenti saat keluar layar
- * dan hanya menggambar satu frame statis jika prefers-reduced-motion aktif.
+ * Kursor memutar arus di sekitarnya dan memicu percikan aksen kuning.
  */
 export default function FlowField() {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -35,9 +34,16 @@ export default function FlowField() {
       return { x, y, px: x, py: y, life: 80 + Math.random() * 160 };
     };
 
-    const resize = () => {
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
+    const resize = (force = false) => {
+      const nextW = canvas.clientWidth;
+      const nextH = canvas.clientHeight;
+      // Hindari reset partikel jika hanya tinggi address-bar mobile yang berubah
+      if (!force && Math.abs(nextW - w) < 2 && Math.abs(nextH - h) < 80) {
+        return;
+      }
+
+      w = nextW;
+      h = nextH;
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -45,20 +51,17 @@ export default function FlowField() {
         { length: Math.min(700, Math.floor((w * h) / 2600)) },
         spawn,
       );
-      document.documentElement.dataset.particles = String(ps.length);
     };
 
     const step = () => {
       t += 1;
-      // pudarkan jejak lama
       ctx.globalCompositeOperation = "destination-out";
       ctx.fillStyle = "rgba(0,0,0,0.05)";
       ctx.fillRect(0, 0, w, h);
       ctx.globalCompositeOperation = "source-over";
 
-      ctx.strokeStyle = "rgba(140,160,174,0.7)";
-      ctx.lineWidth = 1;
-      ctx.beginPath();
+      const calmPath = new Path2D();
+      const boltPath = new Path2D();
 
       for (const p of ps) {
         const a =
@@ -73,6 +76,8 @@ export default function FlowField() {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const d = Math.hypot(dx, dy);
+        const inVortex = d < 160 && d > 0.1;
+
         if (d < 200 && d > 0.1) {
           const k = 1 - d / 200;
           vx += (-dy / d) * k * 2.4 + (dx / d) * k * 0.8;
@@ -83,14 +88,22 @@ export default function FlowField() {
         p.py = p.y;
         p.x += vx * 1.4;
         p.y += vy * 1.4;
-        ctx.moveTo(p.px, p.py);
-        ctx.lineTo(p.x, p.y);
+
+        const targetPath = inVortex ? boltPath : calmPath;
+        targetPath.moveTo(p.px, p.py);
+        targetPath.lineTo(p.x, p.y);
 
         if (--p.life <= 0 || p.x < 0 || p.x > w || p.y < 0 || p.y > h) {
           Object.assign(p, spawn());
         }
       }
-      ctx.stroke();
+
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "rgba(140,160,174,0.7)";
+      ctx.stroke(calmPath);
+
+      ctx.strokeStyle = "rgba(250,204,21,0.55)";
+      ctx.stroke(boltPath);
     };
 
     const loop = () => {
@@ -106,27 +119,30 @@ export default function FlowField() {
     const onLeave = () => {
       mouse.x = mouse.y = -9999;
     };
+    const onResize = () => resize(false);
 
     const io = new IntersectionObserver(([e]) => {
       visible = e.isIntersecting;
     });
 
-    resize();
+    resize(true);
     io.observe(canvas);
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", onResize);
     window.addEventListener("pointermove", onMove);
     document.addEventListener("pointerleave", onLeave);
 
     if (reduce) {
       for (let i = 0; i < 220; i++) step();
     } else {
+      // Pre-warm agar arus angin langsung terlihat saat pertama kali halaman dimuat
+      for (let i = 0; i < 35; i++) step();
       raf = requestAnimationFrame(loop);
     }
 
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect();
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", onResize);
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", onLeave);
     };
