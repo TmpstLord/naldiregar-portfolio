@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 import type { ContactMessageInput } from "@/lib/validations";
 
 // Ganti dengan alamat email aktif yang kamu gunakan untuk melamar kerja
-const CONTACT_EMAIL = "emailkamu@gmail.com";
+const CONTACT_EMAIL = "naldiregar.17@gmail.com";
 
 type FieldErrors = Partial<Record<keyof ContactMessageInput, string[]>>;
 
