@@ -49,7 +49,7 @@ export default async function ProjectDetail({
 
       <article className="mt-14">
         <header className="pb-12">
-          <p className="text-lg text-[var(--bolt)]">
+          <p className="text-lg text-[var(--bone)]">
             {project.role}
             <span className="text-[var(--rain)]"> — {project.timeline}</span>
           </p>
@@ -76,7 +76,7 @@ export default async function ProjectDetail({
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[var(--bolt)] px-5 py-2.5 font-semibold text-[var(--squall)] transition-transform hover:-translate-y-0.5"
+                  className="ui bg-[var(--bolt)] px-5 py-2.5 font-semibold text-[var(--squall)] transition-transform hover:-translate-y-0.5"
                 >
                   Lihat repository GitHub
                 </a>
@@ -113,7 +113,7 @@ export default async function ProjectDetail({
             {project.metrics.map((metric) => (
               <div key={metric.label}>
                 <dt className="text-sm text-[var(--rain)]">{metric.label}</dt>
-                <dd className="display mt-1 text-4xl text-[var(--bolt)]">
+                <dd className="display mt-1 text-4xl text-[var(--bone)]">
                   {metric.value}
                 </dd>
                 <dd className="mt-1 text-sm text-[var(--rain)]">

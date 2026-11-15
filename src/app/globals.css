@@ -1,5 +1,4 @@
 @import "tailwindcss";
-/* Tempel di bawah isi globals.css kamu (setelah @import "tailwindcss" / @tailwind ...). */
 
 :root {
   --squall: #101c26; /* latar: langit badai */
@@ -30,30 +29,62 @@ body {
   outline-offset: 3px;
 }
 
-/* Huruf display: Archivo versi sempit dan tebal, seperti papan peringatan cuaca */
+/* Huruf display: Archivo, lebar sedang dan tebal */
 .display {
   font-family: var(--font-display), sans-serif;
-  font-weight: 800;
-  font-variation-settings: "wdth" 70;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  font-variation-settings: "wdth" 85;
+  letter-spacing: -0.02em;
+}
+
+/* Huruf antarmuka (menu, tombol, filter): sans yang sama dengan judul, tapi lebar normal */
+.ui {
+  font-family: var(--font-display), sans-serif;
+  font-variation-settings: "wdth" 100;
+}
+
+/* Link navigasi: garis kuning hanya muncul saat di-hover */
+.navlink {
+  background-image: linear-gradient(var(--bolt), var(--bolt));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 2px;
+  padding-bottom: 2px;
+  transition: background-size 0.25s ease;
+}
+.navlink:hover {
+  background-size: 100% 2px;
 }
 
 /* Garis penanda kuning di bawah teks; terisi penuh saat di-hover */
 .mark {
   background-image: linear-gradient(var(--bolt), var(--bolt));
   background-repeat: no-repeat;
-  background-position: 0 92%;
-  background-size: 100% 0.18em;
+  background-position: 0 96%;
+  background-size: 100% 0.1em;
   transition:
     background-size 0.25s ease,
     color 0.25s ease;
 }
 .mark:hover,
-.mark:focus-visible,
-a:hover > .mark,
-a:focus-visible > .mark {
+a:hover > .mark {
   background-size: 100% 100%;
   color: var(--squall);
+}
+
+/* Kursor berkedip di logo */
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.caret {
+  animation: caret 1.2s step-end infinite;
 }
 
 /* Marquee tech stack */
@@ -73,31 +104,8 @@ a:focus-visible > .mark {
   html {
     scroll-behavior: auto;
   }
-  .drift {
+  .drift,
+  .caret {
     animation: none;
   }
-}
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }

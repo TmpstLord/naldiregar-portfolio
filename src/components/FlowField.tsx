@@ -45,6 +45,7 @@ export default function FlowField() {
         { length: Math.min(700, Math.floor((w * h) / 2600)) },
         spawn,
       );
+      document.documentElement.dataset.particles = String(ps.length);
     };
 
     const step = () => {
@@ -55,7 +56,7 @@ export default function FlowField() {
       ctx.fillRect(0, 0, w, h);
       ctx.globalCompositeOperation = "source-over";
 
-      ctx.strokeStyle = "rgba(140,160,174,0.55)";
+      ctx.strokeStyle = "rgba(140,160,174,0.7)";
       ctx.lineWidth = 1;
       ctx.beginPath();
 

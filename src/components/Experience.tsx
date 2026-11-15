@@ -58,7 +58,7 @@ export default function Experience({ items }: { items: Item[] }) {
                 </div>
                 <div>
                   <h3 className="display text-2xl sm:text-3xl">{item.role}</h3>
-                  <p className="mt-1 text-[var(--bolt)]">{item.organization}</p>
+                  <p className="mt-1 text-[var(--bone)]">{item.organization}</p>
                   <p className="mt-4 max-w-2xl text-lg leading-8 text-[var(--bone)]/85">
                     {item.description}
                   </p>

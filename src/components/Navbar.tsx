@@ -16,6 +16,11 @@ const navLinks = [
   { name: "Case Studies", href: "/#projects" },
   { name: "Resume", href: "/resume" },
   { name: "GitHub", href: "https://github.com/TmpstLord", external: true },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/raynaldi-irfansya-regar-91468944b",
+    external: true,
+  },
 ];
 
 export default function Navbar() {
@@ -25,6 +30,7 @@ export default function Navbar() {
   const { scrollY, scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
 
+  // Turun saat scroll ke bawah, muncul lagi saat scroll ke atas
   useMotionValueEvent(scrollY, "change", (y) => {
     const prev = scrollY.getPrevious() ?? 0;
     setHidden(y > prev && y > 160 && !open);
@@ -66,25 +72,26 @@ export default function Navbar() {
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
         <Link
           href="/"
-          className="display flex items-center gap-3 text-2xl tracking-wide sm:text-3xl"
+          aria-label="Tempest, ke beranda"
+          className="display flex items-baseline gap-1 text-2xl sm:text-3xl"
         >
+          Tempest
           <span
             aria-hidden
-            className="h-2.5 w-2.5 shrink-0 rotate-45 bg-[var(--bolt)]"
+            className="caret inline-block h-[0.72em] w-[0.38em] bg-[var(--bolt)]"
           />
-          <span>
-            Tempest<span className="text-[var(--bolt)]"></span>
-          </span>
         </Link>
 
-        <nav className="hidden items-center gap-10 text-lg md:flex">
-          {navLinks.map((item) => renderLink(item, "mark"))}
+        <nav className="hidden items-center gap-7 lg:gap-10 md:flex">
+          {navLinks.map((item) =>
+            renderLink(item, "ui navlink text-base font-medium"),
+          )}
         </nav>
 
         <div className="flex items-center gap-3">
           <Link
             href="/#contact"
-            className="bg-[var(--bolt)] px-4 py-2 text-sm font-semibold text-[var(--squall)] transition-transform hover:-translate-y-0.5 sm:text-base"
+            className="ui bg-[var(--bolt)] px-4 py-2 text-sm font-semibold text-[var(--squall)] transition-transform hover:-translate-y-0.5"
           >
             Get in Touch
           </Link>

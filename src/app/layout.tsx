@@ -3,6 +3,8 @@ import { Archivo, Newsreader } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Inspector from "@/components/inspector";
+import StatusBar from "@/components/StatusBar";
 
 const display = Archivo({
   subsets: ["latin"],
@@ -16,7 +18,7 @@ const body = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Raynaldi Irfansya Regar — Software Engineer | Portfolio",
+  title: "Raynaldi Irfansya Regar - software engineer | Portfolio",
   description:
     "Portofolio Full-Stack Web & Game Backend Engineer — Studi kasus arsitektur Laravel, Express.js, Unity DOTS/ECS, dan Godot Engine.",
 };
@@ -29,10 +31,14 @@ export default function RootLayout({
   return (
     <html lang="id" className="scroll-smooth">
       {/* Warna latar dan teks sekarang diatur lewat globals.css */}
-      <body className={`${display.variable} ${body.variable} antialiased`}>
+      <body
+        className={`${display.variable} ${body.variable} antialiased pb-8 print:pb-0`}
+      >
         <Navbar />
         {children}
         <Footer />
+        <Inspector />
+        <StatusBar />
       </body>
     </html>
   );

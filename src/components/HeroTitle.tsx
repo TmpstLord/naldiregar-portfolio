@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 
-const HERO_SIZE = "text-[clamp(4.5rem,16vw,12.5rem)] leading-[0.84]";
+const HERO_SIZE = "text-[clamp(4rem,12.5vw,10rem)] leading-[0.88]";
 
 export default function HeroTitle({
   lines,

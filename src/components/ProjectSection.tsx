@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Project } from "@/types/portfolio";
 
@@ -9,10 +10,19 @@ type FilterCategory = "All" | "Web & Backend" | "Game Systems";
 
 const FILTERS: FilterCategory[] = ["All", "Web & Backend", "Game Systems"];
 
+const extractYear = (timeline: string) => {
+  const match = timeline.match(/\d{4}/);
+  return match ? Number(match[0]) : 0;
+};
+
 export default function ProjectSection({ projects }: { projects: Project[] }) {
+  const sortedProjects = [...projects].sort(
+    (a, b) => extractYear(b.timeline) - extractYear(a.timeline),
+  );
+
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("All");
   const [openId, setOpenId] = useState<Project["id"] | null>(
-    projects[0]?.id ?? null,
+    sortedProjects[0]?.id ?? null,
   );
 
   const isGameProject = (slug: string) =>
@@ -25,7 +35,7 @@ export default function ProjectSection({ projects }: { projects: Project[] }) {
         ? isGameProject(p.slug)
         : !isGameProject(p.slug);
 
-  const filtered = projects.filter((p) => inFilter(p, activeFilter));
+  const filtered = sortedProjects.filter((p) => inFilter(p, activeFilter));
 
   return (
     <section id="projects" className="border-t border-[var(--line)] py-28">
@@ -54,16 +64,19 @@ export default function ProjectSection({ projects }: { projects: Project[] }) {
                   type="button"
                   aria-pressed={active}
                   onClick={() => {
+                    const nextList = sortedProjects.filter((p) =>
+                      inFilter(p, f),
+                    );
                     setActiveFilter(f);
-                    setOpenId(null);
+                    setOpenId(nextList[0]?.id ?? null);
                   }}
-                  className={`px-3 py-1.5 text-sm transition-colors ${
+                  className={`ui cursor-pointer px-3 py-1.5 text-sm transition-colors ${
                     active
-                      ? "bg-[var(--bolt)] text-[var(--squall)]"
+                      ? "bg-[var(--bolt)] font-semibold text-[var(--squall)]"
                       : "text-[var(--rain)] hover:text-[var(--bone)]"
                   }`}
                 >
-                  {f} ({projects.filter((p) => inFilter(p, f)).length})
+                  {f} ({sortedProjects.filter((p) => inFilter(p, f)).length})
                 </button>
               );
             })}
@@ -71,9 +84,11 @@ export default function ProjectSection({ projects }: { projects: Project[] }) {
         </div>
 
         <ul className="mt-14 border-t border-[var(--line)]">
-          {filtered.map((p) => {
+          {filtered.map((p, idx) => {
             const isOpen = openId === p.id;
             const panelId = `panel-${p.slug}`;
+            const displayYear =
+              extractYear(p.timeline) || p.timeline.split("•")[0].trim();
 
             return (
               <li key={p.id} className="border-b border-[var(--line)]">
@@ -83,19 +98,37 @@ export default function ProjectSection({ projects }: { projects: Project[] }) {
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => setOpenId(isOpen ? null : p.id)}
-                    className="flex w-full items-baseline justify-between gap-6 py-7 text-left"
+                    className="group flex w-full cursor-pointer items-baseline justify-between gap-6 py-7 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--bolt)]"
                   >
-                    <span className="display text-3xl sm:text-5xl">
-                      <span
-                        className={`box-decoration-clone px-1 transition-colors duration-300 ${
-                          isOpen ? "bg-[var(--bolt)] text-[var(--squall)]" : ""
-                        }`}
-                      >
-                        {p.title}
+                    <span className="flex items-baseline gap-4 sm:gap-6">
+                      <span className="font-mono text-xs text-[var(--rain)] sm:text-sm">
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                      <span className="display text-3xl sm:text-5xl">
+                        <span
+                          className={`box-decoration-clone -mx-1 px-2.5 transition-colors duration-300 ${
+                            isOpen
+                              ? "bg-[var(--bolt)] text-[var(--squall)]"
+                              : "group-hover:text-[var(--bolt)]"
+                          }`}
+                        >
+                          {p.title}
+                        </span>
                       </span>
                     </span>
-                    <span className="shrink-0 text-[var(--rain)]">
-                      {p.timeline.split("•")[0].trim()}
+
+                    <span className="flex shrink-0 items-center gap-4 font-mono text-sm text-[var(--rain)]">
+                      <span>{displayYear}</span>
+                      <span
+                        aria-hidden
+                        className={`w-3 text-center text-base transition-colors ${
+                          isOpen
+                            ? "text-[var(--bolt)]"
+                            : "group-hover:text-[var(--bone)]"
+                        }`}
+                      >
+                        {isOpen ? "−" : "+"}
+                      </span>
                     </span>
                   </button>
                 </h3>
@@ -110,14 +143,33 @@ export default function ProjectSection({ projects }: { projects: Project[] }) {
                       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="grid gap-6 pb-10 md:grid-cols-[1fr_2fr]">
-                        <p className="text-[var(--bolt)]">{p.role}</p>
+                      <div className="grid gap-6 pb-10 pl-0 sm:pl-10 md:grid-cols-[1fr_2fr]">
+                        <div>
+                          <p className="font-mono text-sm text-[var(--bolt)]">
+                            {p.role}
+                          </p>
+                          {p.coverImage && (
+                            <Link
+                              href={`/projects/${p.slug}`}
+                              className="group/img relative mt-4 block aspect-video overflow-hidden border border-[var(--line)] bg-[var(--deck)] transition-colors hover:border-[var(--bolt)]"
+                            >
+                              <Image
+                                src={p.coverImage}
+                                alt={p.title}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 300px"
+                                className="object-cover transition-transform duration-500 group-hover/img:scale-[1.03]"
+                              />
+                            </Link>
+                          )}
+                        </div>
+
                         <div>
                           <p className="max-w-2xl text-lg leading-8 text-[var(--bone)]/85">
                             {p.description}
                           </p>
-                          <p className="mt-4 text-sm italic text-[var(--rain)]">
-                            {p.techStack.join(", ")}
+                          <p className="mt-4 font-mono text-xs tracking-wide text-[var(--rain)]">
+                            {p.techStack.join(" • ")}
                           </p>
                           <Link
                             href={`/projects/${p.slug}`}

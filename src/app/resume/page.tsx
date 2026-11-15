@@ -67,7 +67,7 @@ export default function ResumePage() {
           <h1 className="display text-5xl leading-[0.95] sm:text-7xl print:text-4xl print:text-black">
             Raynaldi Irfansya Regar, S.Kom
           </h1>
-          <p className="mt-3 text-xl text-[var(--bolt)] print:text-neutral-700">
+          <p className="mt-3 text-xl text-[var(--rain)] print:text-neutral-700">
             Full-Stack Web & Game Backend Engineer
           </p>
 
@@ -103,7 +103,7 @@ export default function ResumePage() {
           <dl className="mt-6 grid gap-x-10 gap-y-6 sm:grid-cols-2 print:gap-y-3">
             {skills.map((s) => (
               <div key={s.title}>
-                <dt className="font-semibold text-[var(--bolt)] print:text-black">
+                <dt className="font-semibold text-[var(--rain)] print:text-black">
                   {s.title}
                 </dt>
                 <dd className={`mt-1 ${bodyClass}`}>{s.text}</dd>
@@ -165,7 +165,7 @@ export default function ResumePage() {
                   <h3 className="text-xl font-semibold print:text-black">
                     {p.title}
                   </h3>
-                  <span className="text-[var(--bolt)] print:text-neutral-600">
+                  <span className="text-[var(--rain)] print:text-neutral-600">
                     {p.meta}
                   </span>
                 </div>
@@ -187,7 +187,7 @@ export default function ResumePage() {
                 Sarjana Komputer (S.Kom) — Program Studi Sistem Informasi, FMIPA
               </p>
             </div>
-            <span className="font-semibold text-[var(--bolt)] print:text-neutral-800">
+            <span className="font-semibold text-[var(--rain)] print:text-neutral-800">
               IPK 3.85 / 4.00 (Cum Laude) • 2026
             </span>
           </div>

@@ -15,8 +15,9 @@ export default function Footer() {
           >
             GitHub
           </a>
+          {/* Ganti dengan URL profil LinkedIn kamu */}
           <a
-            href="https://www.linkedin.com/in/raynaldi-irfansya-regar-91468944b"
+            href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
             className="mark"

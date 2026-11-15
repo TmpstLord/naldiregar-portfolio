@@ -1,23 +1,14 @@
 import Link from "next/link";
+import RevealHeading from "@/components/RevealHeading";
 import ProjectSection from "@/components/ProjectSection";
 import Experience from "@/components/Experience";
 import FlowField from "@/components/FlowField";
 import HeroTitle from "@/components/HeroTitle";
-import Marquee from "@/components/Marquee";
+import StackTree from "@/components/StackTree";
 import ContactSection from "@/components/ContactSection";
 import ProfilePhoto from "@/components/ProfilePhoto";
 import { featuredProjects, experiences } from "@/lib/data";
 import { getTopGithubRepos } from "@/lib/github";
-
-const techStack = [
-  "Laravel",
-  "Express.js",
-  "TypeScript",
-  "MySQL",
-  "Firebase",
-  "Unity DOTS",
-  "Godot",
-];
 
 export default async function Home() {
   const githubRepos = await getTopGithubRepos();
@@ -25,9 +16,9 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-[var(--squall)] text-[var(--bone)]">
       {/* Hero */}
-      <section className="relative overflow-hidden">
+      <section id="top" className="relative overflow-hidden">
         <FlowField />
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pb-28 pt-40 lg:grid-cols-[1fr_320px] lg:items-center lg:pt-52">
+        <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pb-28 pt-40 lg:grid-cols-[1fr_280px] lg:items-end lg:pt-52">
           <div>
             <HeroTitle lines={["Raynaldi", "Irfansya", "Regar"]} />
             <h2 className="display mt-8 text-2xl text-[var(--rain)] sm:text-3xl">
@@ -44,7 +35,10 @@ export default async function Home() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-x-8 gap-y-4 text-lg">
-              <Link href="#projects" className="mark">
+              <Link
+                href="#projects"
+                className="ui bg-[var(--bolt)] px-5 py-2.5 font-semibold text-[var(--squall)] transition-transform hover:-translate-y-0.5"
+              >
                 Lihat studi kasus
               </Link>
               <Link href="/resume" className="mark">
@@ -58,6 +52,14 @@ export default async function Home() {
               >
                 GitHub
               </a>
+              <a
+                href="https://www.linkedin.com/in/raynaldi-irfansya-regar-91468944b"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mark"
+              >
+                LinkedIn
+              </a>
             </div>
           </div>
 
@@ -65,8 +67,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Tech stack */}
-      <Marquee items={techStack} />
+      {/* Teknologi utama */}
+      <StackTree />
 
       {/* Pengalaman */}
       <Experience items={experiences} />
@@ -75,12 +77,12 @@ export default async function Home() {
       <ProjectSection projects={featuredProjects} />
 
       {/* GitHub */}
-      <section className="border-t border-[var(--line)] py-28">
+      <section id="github" className="border-t border-[var(--line)] py-28">
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="display text-5xl leading-none sm:text-6xl">
+            <RevealHeading className="text-5xl leading-none sm:text-6xl">
               Repositori terbaru
-            </h2>
+            </RevealHeading>
             <a
               href="https://github.com/TmpstLord"
               target="_blank"
