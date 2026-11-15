@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { featuredProjects } from "@/lib/data";
 import HeroTitle from "@/components/HeroTitle";
+import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 
 export async function generateStaticParams() {
   return featuredProjects.map((project) => ({
@@ -20,11 +21,11 @@ export async function generateMetadata({
   const project = featuredProjects.find((p) => p.slug === slug);
 
   if (!project) {
-    return { title: "Project Not Found | MasterOfTempest" };
+    return { title: "Project Not Found | Raynaldi Irfansya Regar" };
   }
 
   return {
-    title: `${project.title} | MasterOfTempest`,
+    title: `${project.title} | Raynaldi Irfansya Regar`,
     description: project.description,
   };
 }
@@ -143,7 +144,10 @@ export default async function ProjectDetail({
           <h2 className="display text-3xl sm:text-4xl">
             Arsitektur dan implementasi kunci
           </h2>
-          <ul className="mt-8 space-y-5">
+
+          <ArchitectureDiagram slug={project.slug} />
+
+          <ul className="mt-10 space-y-5">
             {project.architectureHighlights.map((highlight, index) => (
               <li
                 key={index}

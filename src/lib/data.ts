@@ -12,6 +12,18 @@ export const featuredProjects: Project[] = [
     techStack: ["JavaScript", "Node.js", "EJS", "Firebase"],
     githubUrl: "https://github.com/TmpstLord/visit-suluttenggo-web",
     featured: true,
+    // Aktifkan (hapus //) setelah upload file ke public/projects/
+    // coverImage: "/projects/visit-suluttenggo-cover.jpg",
+    // gallery: [
+    //   {
+    //     src: "/projects/visit-suluttenggo-cover.jpg",
+    //     caption: "Halaman utama katalog destinasi wisata Visit Suluttenggo yang dirender dinamis dengan EJS.",
+    //   },
+    //   {
+    //     src: "/projects/visit-suluttenggo-admin.jpg",
+    //     caption: "Pengelolaan data destinasi dan sinkronisasi koleksi Firebase.",
+    //   },
+    // ],
     problem:
       "Portal informasi pariwisata regional membutuhkan penyajian katalog destinasi, akomodasi, dan agenda budaya yang cepat dimuat serta mudah diperbarui secara dinamis tanpa harus mengubah kode tampilan secara manual.",
     solution:
@@ -50,6 +62,18 @@ export const featuredProjects: Project[] = [
     techStack: ["Kodular", "Spreadsheet / Excel", "Block Logic", "Data Flow"],
     githubUrl: "https://github.com/TmpstLord/rusdi-waste-bank",
     featured: true,
+    // Aktifkan (hapus //) setelah upload file ke public/projects/
+    // coverImage: "/projects/rusdi-cover.jpg",
+    // gallery: [
+    //   {
+    //     src: "/projects/rusdi-app.jpg",
+    //     caption: "Antarmuka aplikasi Android RUSDI (Kodular) untuk pencatatan setoran dan cek saldo nasabah.",
+    //   },
+    //   {
+    //     src: "/projects/rusdi-ledger.jpg",
+    //     caption: "Struktur tabel Spreadsheet terpusat untuk log transaksi penimbangan dan rekap volume sampah.",
+    //   },
+    // ],
     problem:
       "Pencatatan setoran sampah, konversi berat ke saldo nasabah, dan rekapitulasi operasional bank sampah masih berjalan manual di buku catatan sehingga rawan selisih data dan lambat direkap saat pelaporan.",
     solution:
@@ -88,6 +112,19 @@ export const featuredProjects: Project[] = [
     techStack: ["Unity DOTS", "C#", "ECS Architecture", "Profiling"],
     githubUrl: "https://github.com/TmpstLord/ocean-hero-dots-benchmark",
     featured: true,
+    coverImage: "/projects/ocean-hero.jpg",
+    gallery: [
+      {
+        src: "/projects/ocean-hero.jpg",
+        caption:
+          "Arsitektur scene GameMenu Ocean Hero pada Unity 6 dengan implementasi SystemBase ECS (GameLogicSystem.cs).",
+      },
+      {
+        src: "/projects/profiler-ecs.jpg",
+        caption:
+          "Pengujian Stress Test dengan Entities 1.4.4 & Burst Compiler (1.500–3.000 entitas aktif) dipantau langsung via Unity Profiler.",
+      },
+    ],
     problem:
       "Pada skenario game 2D mobile dengan ratusan hingga ribuan entitas aktif secara bersamaan, pendekatan tradisional MonoBehaviour OOP memicu overhead garbage collection dan penurunan frame rate (FPS drop).",
     solution:
@@ -126,6 +163,18 @@ export const featuredProjects: Project[] = [
     techStack: ["Godot Engine", "GDScript", "State Management", "Backend API"],
     githubUrl: "https://github.com/TmpstLord/eco-heroes-godot",
     featured: true,
+    // Aktifkan (hapus //) setelah upload file ke public/projects/
+    coverImage: "/projects/eco-heroes-cover.png",
+    // gallery: [
+    //   {
+    //     src: "/projects/eco-heroes-solara.jpg",
+    //     caption: "Mekanik misi region Solara dengan manajemen countdown timer HUD dan reset mesin interaktif.",
+    //   },
+    //   {
+    //     src: "/projects/eco-heroes-riverfall.jpg",
+    //     caption: "Sinkronisasi Global State Manager dan percabangan dialog NPC dinamis di region Riverfall.",
+    //   },
+    // ],
     problem:
       "Transisi antar-scene misi, sinkronisasi timer HUD saat misi gagal atau selesai, serta pemicu dialog NPC lintas wilayah sering mengalami desinkronisasi state yang merusak alur permainan.",
     solution:
@@ -160,6 +209,18 @@ export const featuredProjects: Project[] = [
     techStack: ["Laravel", "MySQL", "JavaScript", "Tailwind CSS"],
     githubUrl: "https://github.com/TmpstLord/akreditasi-si-dashboard",
     featured: true,
+    // Aktifkan (hapus //) setelah upload file ke public/projects/
+    coverImage: "/projects/akreditasi-cover.png",
+    // gallery: [
+    //   {
+    //     src: "/projects/akreditasi-progress.jpg",
+    //     caption: "Dashboard pemantauan kelengkapan instrumen LKPS & LED dengan progress bar otomatis per kriteria.",
+    //   },
+    //   {
+    //     src: "/projects/akreditasi-pdf-viewer.jpg",
+    //     caption: "Dynamic table builder dan integrated PDF viewer untuk verifikasi bukti fisik pada mode asesor.",
+    //   },
+    // ],
     problem:
       "Pengelolaan ratusan tabel instrumen LKPS, dokumen pendukung LED, dan pengecekan kelengkapan bukti fisik per kriteria akreditasi membutuhkan sistem terpusat agar tim penyusun dan asesor dapat menelusuri dokumen secara cepat dan terukur.",
     solution:
