@@ -19,7 +19,7 @@ export default function RevealHeading({
           className="block"
           initial={reduce ? false : { y: "130%" }}
           whileInView={{ y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           {children}

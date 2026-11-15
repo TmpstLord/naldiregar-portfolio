@@ -10,6 +10,7 @@ import ContactSection from "@/components/ContactSection";
 import ProfilePhoto from "@/components/ProfilePhoto";
 import { featuredProjects, experiences } from "@/lib/data";
 import { getTopGithubRepos } from "@/lib/github";
+import { ArrowUpRight } from "lucide-react";
 
 export default async function Home() {
   const githubRepos = await getTopGithubRepos();
@@ -82,11 +83,17 @@ export default async function Home() {
       <section id="github" className="border-t border-[var(--line)] py-28">
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <RevealHeading className="text-5xl leading-none sm:text-6xl">
-              Repositori terbaru
-            </RevealHeading>
+            <div>
+              <RevealHeading className="text-5xl leading-none sm:text-6xl">
+                Repositori terbaru
+              </RevealHeading>
+              <p className="mt-4 text-base text-[var(--rain)]">
+                Kode sumber terbuka, eksperimen arsitektur, dan dokumentasi
+                proyek di GitHub.
+              </p>
+            </div>
             <a
-              href="https://github.com/TmpstLord"
+              href="https://github.com/TmpstLord?tab=repositories"
               target="_blank"
               rel="noopener noreferrer"
               className="mark text-lg"
@@ -95,35 +102,65 @@ export default async function Home() {
             </a>
           </div>
 
-          <ul className="mt-12 border-t border-[var(--line)]">
-            {githubRepos.length > 0 ? (
-              githubRepos.map((repo) => (
-                <li key={repo.id} className="border-b border-[var(--line)]">
+          {githubRepos.length > 0 ? (
+            <ul className="mt-12 grid gap-5 md:grid-cols-2">
+              {githubRepos.map((repo, idx) => (
+                <li key={repo.id}>
                   <a
                     href={repo.html_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group grid gap-2 py-6 md:grid-cols-[1.2fr_2fr_auto] md:items-baseline md:gap-8"
+                    className="group flex h-full flex-col justify-between border border-[var(--line)] bg-[var(--deck)]/55 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--bolt)]/75 hover:bg-[var(--deck)]"
                   >
-                    <span className="display text-2xl sm:text-3xl">
-                      <span className="mark">{repo.name}</span>
-                    </span>
-                    <span className="text-[var(--rain)]">
-                      {repo.description || "Belum ada deskripsi."}
-                    </span>
-                    <span className="text-sm text-[var(--rain)]">
-                      {repo.language ? `${repo.language}, ` : ""}
-                      {repo.stargazers_count} bintang
-                    </span>
+                    <div>
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-center gap-2.5">
+                          <span className="font-mono text-xs text-[var(--rain)]/70">
+                            {String(idx + 1).padStart(2, "0")}
+                          </span>
+                          <h3 className="font-mono text-lg font-medium text-[var(--bone)] transition-colors group-hover:text-[var(--bolt)] sm:text-xl">
+                            {repo.name}
+                          </h3>
+                        </div>
+                        <ArrowUpRight
+                          aria-hidden
+                          className="h-5 w-5 shrink-0 text-[var(--rain)] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[var(--bolt)]"
+                        />
+                      </div>
+
+                      <p className="mt-3 line-clamp-2 text-sm leading-6 text-[var(--rain)]">
+                        {repo.description || "Belum ada deskripsi."}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 flex items-center justify-between border-t border-[var(--line)]/60 pt-4 font-mono text-xs text-[var(--rain)]">
+                      <span className="flex items-center gap-2">
+                        <span
+                          aria-hidden
+                          className={`h-2 w-2 rounded-full ${
+                            repo.language
+                              ? "bg-[var(--bolt)]"
+                              : "bg-[var(--rain)]/50"
+                          }`}
+                        />
+                        <span>{repo.language || "Repository"}</span>
+                      </span>
+
+                      {repo.stargazers_count > 0 && (
+                        <span className="text-[var(--bone)]">
+                          ★ {repo.stargazers_count}
+                        </span>
+                      )}
+                    </div>
                   </a>
                 </li>
-              ))
-            ) : (
-              <li className="py-6 text-[var(--rain)]">
-                Belum ada repositori publik yang bisa ditampilkan.
-              </li>
-            )}
-          </ul>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-12 border-t border-[var(--line)] py-6 text-[var(--rain)]">
+              Belum ada repositori publik yang bisa ditampilkan.
+            </p>
+          )}
         </div>
       </section>
 
