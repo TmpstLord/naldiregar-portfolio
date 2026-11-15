@@ -4,6 +4,7 @@ import ProjectSection from "@/components/ProjectSection";
 import Experience from "@/components/Experience";
 import FlowField from "@/components/FlowField";
 import HeroTitle from "@/components/HeroTitle";
+import HeroTagline from "@/components/HeroTagline";
 import StackTree from "@/components/StackTree";
 import ContactSection from "@/components/ContactSection";
 import ProfilePhoto from "@/components/ProfilePhoto";
@@ -21,9 +22,10 @@ export default async function Home() {
         <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pb-28 pt-40 lg:grid-cols-[1fr_280px] lg:items-end lg:pt-52">
           <div>
             <HeroTitle lines={["Raynaldi", "Irfansya", "Regar"]} />
-            <h2 className="display mt-8 text-2xl text-[var(--rain)] sm:text-3xl">
-              Full-Stack Web & Game Backend Engineer
-            </h2>
+            <HeroTagline
+              text="Full-Stack Web & Game Backend Engineer"
+              className="mt-8"
+            />
             <p className="mt-6 max-w-xl text-xl leading-8 text-[var(--bone)]/85">
               Saya membangun sistem operasional dengan Laravel dan Express.js,
               lalu mengukur dan mengoptimalkan performa game di Unity DOTS dan
