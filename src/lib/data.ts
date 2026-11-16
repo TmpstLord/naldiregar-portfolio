@@ -13,7 +13,7 @@ export const featuredProjects: Project[] = [
     githubUrl: "https://github.com/TmpstLord/visit-suluttenggo-web",
     featured: true,
     // Aktifkan (hapus //) setelah upload file ke public/projects/
-    // coverImage: "/projects/visit-suluttenggo-cover.jpg",
+    coverImage: "/projects/sulut.png",
     // gallery: [
     //   {
     //     src: "/projects/visit-suluttenggo-cover.jpg",
