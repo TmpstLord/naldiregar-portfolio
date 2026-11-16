@@ -5,11 +5,16 @@ export const featuredProjects: Project[] = [
     id: "1",
     title: "Visit Suluttenggo Tourism Web Platform",
     slug: "visit-suluttenggo",
-    role: "Web Developer Intern",
+    role: "Back-End & Full-Stack Web Developer Intern",
     timeline: "2025 • PT Media Makasiow",
     description:
-      "Mengembangkan portal informasi pariwisata regional menggunakan JavaScript dan EJS untuk rendering halaman dinamis, serta Firebase sebagai basis data cloud.",
-    techStack: ["JavaScript", "Node.js", "EJS", "Firebase"],
+      "Mengembangkan portal informasi pariwisata regional berbasis arsitektur decoupled menggunakan Vanilla JavaScript (Fetch API) di sisi klien, serta RESTful API Express.js di atas Firebase Cloud Functions dan Cloud Firestore.",
+    techStack: [
+      "JavaScript",
+      "Express.js",
+      "Firebase Cloud Functions",
+      "Cloud Firestore",
+    ],
     githubUrl: "https://github.com/TmpstLord/visit-suluttenggo-web",
     featured: true,
     // Aktifkan (hapus //) setelah upload file ke public/projects/
@@ -17,37 +22,37 @@ export const featuredProjects: Project[] = [
     // gallery: [
     //   {
     //     src: "/projects/visit-suluttenggo-cover.jpg",
-    //     caption: "Halaman utama katalog destinasi wisata Visit Suluttenggo yang dirender dinamis dengan EJS.",
+    //     caption: "Halaman utama portal Visit Suluttenggo yang memuat berita dan katalog destinasi secara dinamis via REST API.",
     //   },
     //   {
     //     src: "/projects/visit-suluttenggo-admin.jpg",
-    //     caption: "Pengelolaan data destinasi dan sinkronisasi koleksi Firebase.",
+    //     caption: "Dashboard CMS Admin untuk pengelolaan operasi CRUD koleksi wisata, hotel, restoran, agen, dan berita di Cloud Firestore.",
     //   },
     // ],
     problem:
-      "Portal informasi pariwisata regional membutuhkan penyajian katalog destinasi, akomodasi, dan agenda budaya yang cepat dimuat serta mudah diperbarui secara dinamis tanpa harus mengubah kode tampilan secara manual.",
+      "Portal informasi pariwisata regional membutuhkan penyajian katalog destinasi, akomodasi, kuliner, dan berita yang cepat dimuat serta mudah diperbarui melalui panel admin tanpa mengubah kode tampilan secara manual.",
     solution:
-      "Membangun aplikasi web dengan arsitektur server-side templating menggunakan EJS dan JavaScript yang terhubung ke Firebase untuk penyimpanan dan pengelolaan data destinasi secara terstruktur.",
+      "Membangun layanan RESTful API terstruktur menggunakan Express.js yang dijalankan di atas Firebase Cloud Functions dan terhubung ke Cloud Firestore, serta mengintegrasikannya dengan antarmuka web dan dashboard CMS berbasis Fetch API asinkron.",
     architectureHighlights: [
-      "Strukturisasi koleksi data destinasi, kategori wisata, dan informasi akomodasi di Firebase untuk pembacaan serta pembaruan data secara real-time.",
-      "Implementasi komponen tampilan modular menggunakan EJS (Embedded JavaScript) untuk merender halaman katalog dan detail wisata secara dinamis.",
-      "Pengelolaan alur CRUD konten dan validasi input berbasis JavaScript untuk menjaga konsistensi data pada portal.",
+      "Perancangan dan implementasi endpoint RESTful API (GET, POST, PUT, DELETE) menggunakan Express.js pada Firebase Cloud Functions untuk mengelola 5 koleksi utama: wisata, hotel, resto, agent, dan berita.",
+      "Integrasi asinkron pada antarmuka publik dan panel admin (CMS) menggunakan JavaScript Fetch API untuk konsumsi data dinamis, pencarian berbasis slug, serta agregasi statistik dashboard secara real-time.",
+      "Penerapan konfigurasi CORS, pemisahan modul frontend statis (Firebase Hosting) dengan layanan backend serverless, serta pengujian lokal menggunakan Firebase Emulator Suite.",
     ],
     metrics: [
       {
-        label: "View Engine",
-        value: "EJS",
-        note: "Dynamic Server Templating",
+        label: "Backend API",
+        value: "Express.js",
+        note: "Serverless REST API on Cloud Functions",
       },
       {
         label: "Database",
-        value: "Firebase",
-        note: "Cloud NoSQL & Real-time Sync",
+        value: "Firestore",
+        note: "5 Structured NoSQL Collections",
       },
       {
-        label: "Core Stack",
-        value: "JavaScript",
-        note: "End-to-End Web Logic",
+        label: "Client Fetch",
+        value: "Vanilla JS",
+        note: "Async REST Integration & Admin CMS",
       },
     ],
   },
